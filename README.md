@@ -90,7 +90,7 @@ python compute_molecule_stability.py \
 
 **Usage:**
 ```bash
-python energy_benchmark/xtb_optimization.py \
+MKL_NUM_THREADS=16 OMP_NUM_THREADS=16 python energy_benchmark/xtb_optimization.py \
   --input_sdf path/to/generated.sdf \
   --output_sdf path/to/optimized_output.sdf \
   --init_sdf path/to/saved_initial_structures.sdf
