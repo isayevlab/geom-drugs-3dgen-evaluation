@@ -52,6 +52,12 @@ pip install numpy tqdm rdkit torch
 
 **Purpose:** Sanitize and filter the MiDi GEOM-Drugs split files. Removes disconnected molecules and invalid valencies. Also builds a valency lookup dictionary.
 
+This script takes as input a filepath to the GEOM-Drugs splits from [MiDi](https://github.com/cvignac/MiDi); these can be downloaded using the following command:
+
+```console
+wget -r -np -nH --cut-dirs=2 --reject "index.html*" https://bits.csb.pitt.edu/files/geom_raw/
+```
+
 **Usage:**
 ```bash
 python geom_drugs_processing.py \
