@@ -135,6 +135,12 @@ python energy_benchmark/rmsd_energy.py \
 ---
 
 ## 📖 Citation
-
-Will be here soon. 
+```
+@article{nikitin2025geom,
+  title={GEOM-Drugs Revisited: Toward More Chemically Accurate Benchmarks for 3D Molecule Generation},
+  author={Nikitin, Filipp and Dunn, Ian and Koes, David Ryan and Isayev, Olexandr},
+  journal={arXiv preprint arXiv:2505.00169},
+  year={2025}
+}
+```
 
