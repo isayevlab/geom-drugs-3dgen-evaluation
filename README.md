@@ -134,6 +134,34 @@ python energy_benchmark/rmsd_energy.py \
 
 ---
 
+## 📄 Alternative Data Formats
+
+For improved reproducibility and easier maintenance, valency tables are also available in JSON format with schema validation:
+
+### Valency Tables (JSON Format)
+```
+valency_tables/
+├── geom_drugs_h_tuple_valencies.json     # Main aromatic-aware valency table
+├── valency_schema.json                   # JSON schema for validation
+├── legacy_valencies.json                 # Legacy compatibility table
+└── legacy_valency_schema.json           # Schema for legacy format
+```
+
+### Usage with JSON Tables
+```python
+from geom_utils.valency_loader import load_valency_table
+
+# Load main tuple-based valency table
+valency_table = load_valency_table('tuple', validate_schema=True)
+
+# Load legacy table for compatibility
+legacy_table = load_valency_table('legacy', validate_schema=True)
+
+# Use with stability computation
+from geom_utils.molecule_stability import compute_molecules_stability
+stability = compute_molecules_stability(molecules, allowed_bonds=valency_table)
+```
+
 ## 📖 Citation
 ```
 @article{nikitin2025geom,

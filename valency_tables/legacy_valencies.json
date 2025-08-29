@@ -1,0 +1,30 @@
+{
+  "$schema": "legacy_valency_schema.json",
+  "metadata": {
+    "description": "Legacy valency table for backward compatibility",
+    "version": "1.0",
+    "created": "2024",
+    "source": "Legacy values from early molecular stability metrics",
+    "format_description": "Simple valency values without aromatic/non-aromatic separation",
+    "warning": "This table includes chemically implausible entries and is retained only for benchmarking older models"
+  },
+  "valency_table": {
+    "H": {"0": 1, "1": 0, "-1": 0},
+    "C": {"0": [3, 4], "1": 3, "-1": 3},
+    "N": {"0": [2, 3], "1": [2, 3, 4], "-1": 2},
+    "O": {"0": 2, "1": 3, "-1": 1},
+    "F": {"0": 1, "-1": 0},
+    "B": {"0": 3},
+    "Al": {"0": 3},
+    "Si": {"0": 4},
+    "P": {"0": [3, 5], "1": 4},
+    "S": {"0": [2, 6], "1": [2, 3], "2": 4, "3": 5, "-1": 3},
+    "Cl": {"0": 1},
+    "As": {"0": 3},
+    "Br": {"0": 1, "1": 2},
+    "I": {"0": 1},
+    "Hg": {"0": [1, 2]},
+    "Bi": {"0": [3, 5]},
+    "Se": {"0": [2, 4, 6]}
+  }
+}

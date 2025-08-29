@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Valency Table Schema",
+  "description": "Schema for validating molecular valency lookup tables",
+  "type": "object",
+  "required": ["metadata", "valency_table"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["description", "version", "format_description"],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the valency table"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version identifier for the valency table"
+        },
+        "created": {
+          "type": "string",
+          "description": "Creation date or year"
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the valency data"
+        },
+        "format_description": {
+          "type": "string",
+          "description": "Description of the data format"
+        }
+      }
+    },
+    "valency_table": {
+      "type": "object",
+      "description": "Main valency lookup table",
+      "patternProperties": {
+        "^[A-Z][a-z]?$": {
+          "type": "object",
+          "description": "Element symbol (e.g., C, N, O)",
+          "patternProperties": {
+            "^-?[0-9]+$": {
+              "type": "array",
+              "description": "Formal charge state (as string)",
+              "items": {
+                "type": "array",
+                "description": "Valence tuple: [n_aromatic_bonds, valence_non_aromatic]",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Non-negative integer valence values"
+                }
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -9,8 +9,31 @@ from rdkit.Chem import AllChem
 
 def generate_canonical_key(*components):
     """
-    Generate a canonical key for any molecular component (atoms, bonds).
-    This works for angles, bond lengths, and torsions.
+    Generate a canonical key for molecular components ensuring consistent ordering.
+    
+    This function creates a canonical representation for molecular features like
+    bond lengths, bond angles, and torsion angles by ensuring the key is
+    independent of the order in which atoms are specified.
+    
+    For example, a bond between atoms 1 and 3 should have the same key whether
+    specified as (1, 3) or (3, 1). This is crucial for proper aggregation
+    of geometric statistics across molecular datasets.
+    
+    Args:
+        *components: Variable number of atom indices or identifiers
+        
+    Returns:
+        tuple: Canonical tuple representation (lexicographically smallest)
+        
+    Examples:
+        >>> generate_canonical_key(1, 3)
+        (1, 3)
+        >>> generate_canonical_key(3, 1)
+        (1, 3)
+        >>> generate_canonical_key(1, 2, 3, 4)  # Torsion angle
+        (1, 2, 3, 4)
+        >>> generate_canonical_key(4, 3, 2, 1)  # Same torsion, reversed
+        (1, 2, 3, 4)
     """
     key1 = tuple(components)
     key2 = tuple(reversed(components))
@@ -68,9 +91,12 @@ def compute_statistics(diff_sums):
     """
     Computes statistics: average difference, standard deviation, and weight.
     """
+    # Calculate total count for weighting
     total = 0
     for key, (diff_list, count) in diff_sums.items():
         total += count
+        
+    # Compute statistics for each feature type
     avg_diffs = {}
     for key, (diff_list, count) in diff_sums.items():
         avg_diff = np.mean(diff_list) if count > 0 else 0

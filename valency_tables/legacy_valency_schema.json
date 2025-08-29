@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Legacy Valency Table Schema",
+  "description": "Schema for validating legacy molecular valency lookup tables",
+  "type": "object",
+  "required": ["metadata", "valency_table"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["description", "version", "format_description"],
+      "properties": {
+        "description": {"type": "string"},
+        "version": {"type": "string"},
+        "created": {"type": "string"},
+        "source": {"type": "string"},
+        "format_description": {"type": "string"},
+        "warning": {"type": "string"}
+      }
+    },
+    "valency_table": {
+      "type": "object",
+      "description": "Legacy valency lookup table",
+      "patternProperties": {
+        "^[A-Z][a-z]?$": {
+          "type": "object",
+          "description": "Element symbol",
+          "patternProperties": {
+            "^-?[0-9]+$": {
+              "oneOf": [
+                {"type": "integer", "minimum": 0},
+                {
+                  "type": "array",
+                  "items": {"type": "integer", "minimum": 0},
+                  "minItems": 1
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
